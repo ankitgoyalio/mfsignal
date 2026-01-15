@@ -8,6 +8,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "mypy>=1.19.1",
     "pre-commit>=4.5.1",
     "pytest>=9.0.2",
@@ -51,6 +52,9 @@ line-ending = "auto"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+markers = [
+    "network: marks tests as requiring network access (deselect with '-m \"not network\"')",
+]
 
 [tool.coverage.run]
 source = ["."]
@@ -60,3 +64,6 @@ omit = [".venv/*", ".claude/*", "tests/*"]
 exclude_lines = [
     "if __name__ == .__main__.:",
 ]
+
+[tool.coverage.xml]
+output = "coverage.xml"

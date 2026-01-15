@@ -17,7 +17,15 @@ try:
         sys.exit(0)  # Not a Python file
 
     result = subprocess.run(
-        ["uv", "run", "pytest", "--cov=.", "--cov-report=term-missing", "."],
+        [
+            "uv",
+            "run",
+            "pytest",
+            "--cov=.",
+            "--cov-report=xml",
+            "--cov-report=term-missing",
+            ".",
+        ],
         capture_output=True,
         text=True,
     )
