@@ -3,6 +3,7 @@
 Type checker hook for Claude Code.
 Runs mypy with strict mode on Python files.
 """
+
 import json
 import subprocess
 import sys
@@ -10,15 +11,13 @@ import sys
 # Main execution
 try:
     input_data = json.load(sys.stdin)
-    file_path = input_data.get('tool_input', {}).get('file_path', '')
+    file_path = input_data.get("tool_input", {}).get("file_path", "")
 
-    if not file_path.endswith('.py'):
+    if not file_path.endswith(".py"):
         sys.exit(0)  # Not a Python file
 
     result = subprocess.run(
-        ['uv', 'run', 'mypy', '--strict', '.'],
-        capture_output=True,
-        text=True
+        ["uv", "run", "mypy", "--strict", "."], capture_output=True, text=True
     )
 
     if result.returncode == 0:

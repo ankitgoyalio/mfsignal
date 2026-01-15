@@ -3,6 +3,7 @@
 Test runner hook for Claude Code.
 Runs pytest on the project.
 """
+
 import json
 import subprocess
 import sys
@@ -10,15 +11,15 @@ import sys
 # Main execution
 try:
     input_data = json.load(sys.stdin)
-    file_path = input_data.get('tool_input', {}).get('file_path', '')
+    file_path = input_data.get("tool_input", {}).get("file_path", "")
 
-    if not file_path.endswith('.py'):
+    if not file_path.endswith(".py"):
         sys.exit(0)  # Not a Python file
 
     result = subprocess.run(
-        ['uv', 'run', 'pytest', '--cov=.', '--cov-report=term-missing', '.'],
+        ["uv", "run", "pytest", "--cov=.", "--cov-report=term-missing", "."],
         capture_output=True,
-        text=True
+        text=True,
     )
 
     if result.returncode == 0:
